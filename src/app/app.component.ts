@@ -13,4 +13,8 @@ import {MatIconButton} from "@angular/material/button";
 })
 export class AppComponent {
   title = 'doorguadFrontend';
+
+  openAccountTab() {
+    //TODO: machen
+  }
 }
