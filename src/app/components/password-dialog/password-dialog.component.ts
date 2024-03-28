@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {
-  MAT_DIALOG_DATA,
+  MAT_DIALOG_DATA, MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent, MatDialogRef,
@@ -11,6 +11,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {GeneratedPasswordDialogComponent} from "../../generated-password-dialog/generated-password-dialog.component";
 
 @Component({
   selector: 'app-password-dialog',
@@ -34,14 +35,21 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 export class PasswordDialogComponent {
   passwordType: string = 'onetime'; // Default to onetime
 
-  constructor(private dialogRef: MatDialogRef<PasswordDialogComponent>, private http: HttpClient) {}
+  constructor(
+    private dialogRef: MatDialogRef<PasswordDialogComponent>,
+    private dialog: MatDialog,
+    private http: HttpClient
+  ) {}
 
   generatePassword(): void {
     this.http.post<string>('http://localhost:8080/generate-code', {
       onetimePassword: this.passwordType === 'onetime',
       onedayPassword: this.passwordType === 'oneday'
     }).subscribe(password => {
-      this.dialogRef.close(password);
+      this.dialog.open(GeneratedPasswordDialogComponent, {
+        data: { password: password }
+      });
+      this.dialogRef.close();
     });
   }
 

@@ -61,7 +61,16 @@ export class CodesTableComponent implements OnInit {
   }
 
   removeCode(id: number): void {
-    // Implementiere die Logik zum Entfernen eines Codes
+    this.http.delete(`http://localhost:8080/delete-code/${id}`).subscribe(
+      () => {
+        console.log('Code successfully removed.');
+        // Refresh data after removing code
+        this.getAllCodes();
+      },
+      error => {
+        console.error('Error occurred while removing code:', error);
+      }
+    );
   }
 
   deactivateCode(id: number): void {
