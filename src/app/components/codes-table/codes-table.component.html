@@ -1,0 +1,36 @@
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <ng-container *ngIf="column !== 'actions'; else actionsColumn">
+          <ng-container *ngIf="column !== 'expirationDate'; else expirationDateColumn">
+            <ng-container *ngIf="column !== 'creationDate'; else creationDateColumn">
+              {{ element[column] }}
+            </ng-container>
+          </ng-container>
+          <ng-template #creationDateColumn>
+            {{ element[column] | date:'dd.MM.yyyy HH:mm:ss' }}
+          </ng-template>
+          <ng-template #expirationDateColumn>
+            {{ element[column] !== null ? (element[column] | date:'medium') : 'never' }}
+          </ng-template>
+        </ng-container>
+        <ng-template #actionsColumn>
+          <button mat-icon-button (click)="deactivateCode(element.id)">
+            <mat-icon color="red">block</mat-icon>
+          </button>
+          <button mat-icon-button (click)="activateCode(element.id)">
+            <mat-icon color="green">check_circle</mat-icon>
+          </button>
+          <button mat-icon-button (click)="removeCode(element.id)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
