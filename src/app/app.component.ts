@@ -17,9 +17,9 @@ import {NgIf} from "@angular/common";
 export class AppComponent {
   title = 'doorguadFrontend';
   loggedIn: boolean = false;
-  username: string | null = null;
+  accountToken: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(protected authService: AuthService, private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();
@@ -34,9 +34,9 @@ export class AppComponent {
   checkLoginStatus(): void {
     this.loggedIn = this.authService.isLoggedIn();
     if (this.loggedIn) {
-      this.username = this.authService.getUsername();
+      this.accountToken = this.authService.getToken();
     } else {
-      this.username = null;
+      this.accountToken = null;
     }
   }
 

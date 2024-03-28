@@ -11,8 +11,8 @@ export class AuthService {
   constructor() {
   }
 
-  setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+  setToken(token: string | undefined): void {
+    localStorage.setItem(this.tokenKey, <string>token);
   }
 
   getToken(): string | null {
@@ -24,9 +24,8 @@ export class AuthService {
   }
 
   setUsername(username: string | undefined): void {
-    if (typeof username === "string") {
-      localStorage.setItem(this.userName, username)
-    }
+    localStorage.setItem(this.userName, <string>username)
+
   }
 
   getUsername(): string | null {
@@ -38,6 +37,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    console.log("aktueller token: " + this.getToken())
     return !!this.getToken();
   }
 

@@ -8,6 +8,7 @@ import {PasswordDialogComponent} from "../../dialogs/password-dialog/password-di
 import {SnackbarService} from "../../services/snackbarservice";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AuthService} from "../../services/authservice";
+import {AccountSettingsDialogComponent} from "../../dialogs/account-settings-dialog/account-settings-dialog.component";
 
 @Component({
   selector: 'app-admin-page',
@@ -54,7 +55,13 @@ export class AdminPageComponent {
     );
   }
 
-  openAccountSettingsDialog() {
+  openAccountSettingsDialog(): void {
+    const dialogRef = this.dialog.open(AccountSettingsDialogComponent, {
+      width: '400px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

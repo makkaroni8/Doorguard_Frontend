@@ -13,7 +13,8 @@
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" class="account_menu">
-  <button mat-menu-item disabled>{{ username }}</button>
+  <button mat-menu-item disabled>{{ authService.getUsername() }}</button>
+  <button mat-menu-item disabled>{{ accountToken }}</button>
   <hr>
   <button mat-menu-item (click)="logout()">Logout</button>
 </mat-menu>

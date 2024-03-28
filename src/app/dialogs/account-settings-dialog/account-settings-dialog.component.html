@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Account Settings</h2>
+
+<mat-dialog-content>
+  <div class="account_settings">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Account
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>New Name</mat-label>
+        <input matInput [(ngModel)]="newName">
+      </mat-form-field>
+      <button mat-raised-button (click)="updateName()" color="primary">Submit</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Password
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>New Password</mat-label>
+        <input matInput [(ngModel)]="newPassword">
+      </mat-form-field>
+      <button mat-raised-button (click)="updatePassword()" color="primary">Submit</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Code
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>New Code</mat-label>
+        <input matInput [(ngModel)]="newCode">
+      </mat-form-field>
+      <button mat-raised-button (click)="updateCode()" color="primary">Submit</button>
+    </mat-expansion-panel>
+  </div>
+</mat-dialog-content>
