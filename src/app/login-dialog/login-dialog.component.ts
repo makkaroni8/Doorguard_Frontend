@@ -50,21 +50,22 @@ export class LoginDialogComponent {
     const body = {username, password};
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    return this.http.post<string>(url, body, {headers, responseType: 'text' as 'json'});
+    console.log(body)
+    return this.http.post<string>(url, body, {headers, responseType: 'json'});
   }
 
   login(): void {
+    console.log("username: " + this.username + " password: " + this.password)
     this.use(this.username, this.password)
       .subscribe(
         accountCode => {
           console.log('Logged in successfully. Account code:', accountCode);
           this.snackbarService.openSnackbar('Success: Login Erfolgreich', 3000, true);
-          this.router.navigate(['/admin-panel']);
-          },
+          this.router.navigate(['/admin-page']);
+        },
         error => {
           console.error('Login failed:', error);
           this.snackbarService.openSnackbar('Error: Login fehlgeschlagen', 3000, false);
-
         }
       );
     this.dialogRef.close();
