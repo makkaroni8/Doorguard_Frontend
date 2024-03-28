@@ -6,6 +6,10 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {PasswordDialogComponent} from "../password-dialog/password-dialog.component";
+import {GeneratedPasswordDialogComponent} from "../../generated-password-dialog/generated-password-dialog.component";
+import {SnackbarComponent} from "../../snackbar/snackbar.component";
+import {SnackbarService} from "../../services/snackbarservice";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-admin-page',
@@ -15,16 +19,18 @@ import {PasswordDialogComponent} from "../password-dialog/password-dialog.compon
     MatCardContent,
     MatIcon,
     RouterLink,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css'
 })
 export class AdminPageComponent {
+  adminPassword?: string;
 
-  generatedPassword?: string;
-
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private http: HttpClient,
+              private snackbarService: SnackbarService) {
   }
 
   openPasswordDialog(): void {
@@ -32,10 +38,23 @@ export class AdminPageComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ok') {
-        // Handle "OK" action
       } else {
-        // Handle "Close" action or do nothing
       }
     });
+  }
+
+  openDoor() {
+    this.adminPassword = "66017";
+    this.http.post('http://localhost:8080/unlock-door/' + this.adminPassword, {},
+      {responseType: 'text'}).subscribe(
+      () => {
+        console.log('Door successfully unlocked.');
+        this.snackbarService.openSnackbar('Your message here', 3000, true);
+      },
+      error => {
+        console.error('Error occurred while unlocking door:', error);
+        this.snackbarService.openSnackbar('Your message here', 3000, false);
+      }
+    );
   }
 }

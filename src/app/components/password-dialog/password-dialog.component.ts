@@ -42,10 +42,10 @@ export class PasswordDialogComponent {
   ) {}
 
   generatePassword(): void {
-    this.http.post<string>('http://localhost:8080/generate-code', {
+    this.http.post('http://localhost:8080/generate-code', {
       onetimePassword: this.passwordType === 'onetime',
       onedayPassword: this.passwordType === 'oneday'
-    }).subscribe(password => {
+    }, { responseType: 'text' }).subscribe(password => {
       this.dialog.open(GeneratedPasswordDialogComponent, {
         data: { password: password }
       });

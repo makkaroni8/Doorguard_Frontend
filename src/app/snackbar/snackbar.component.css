@@ -1,0 +1,20 @@
+.custom-snackbar {
+  height: 20px;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.failure {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+}
