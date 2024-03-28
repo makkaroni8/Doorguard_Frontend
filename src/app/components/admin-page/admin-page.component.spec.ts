@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminPageComponent } from './admin-page.component';
+import {AdminPageComponent} from './admin-page.component';
 
 describe('AdminPageComponent', () => {
   let component: AdminPageComponent;
@@ -11,7 +11,7 @@ describe('AdminPageComponent', () => {
       imports: [AdminPageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(AdminPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,31 +1,44 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly tokenKey = 'userToken';
+  private readonly tokenKey = 'account_code';
+  private readonly userName = 'account_name';
 
-  constructor() { }
+  constructor() {
+  }
 
-  // Methode zum Speichern des Tokens im Local Storage
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
 
-  // Methode zum Abrufen des Tokens aus dem Local Storage
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
-  // Methode zum Entfernen des Tokens aus dem Local Storage
   removeToken(): void {
     localStorage.removeItem(this.tokenKey);
   }
 
-  // Methode zur Überprüfung, ob ein Token im Local Storage vorhanden ist
+  setUsername(username: string | undefined): void {
+    if (typeof username === "string") {
+      localStorage.setItem(this.userName, username)
+    }
+  }
+
+  getUsername(): string | null {
+    return localStorage.getItem(this.userName);
+  }
+
+  removeUsername(): void {
+    localStorage.removeItem(this.userName);
+  }
+
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+
 }

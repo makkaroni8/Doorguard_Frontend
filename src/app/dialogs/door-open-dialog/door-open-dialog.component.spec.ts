@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DoorOpenDialogComponent } from './door-open-dialog.component';
+import {DoorOpenDialogComponent} from './door-open-dialog.component';
 
 describe('DoorOpenDialogComponent', () => {
   let component: DoorOpenDialogComponent;
@@ -11,7 +11,7 @@ describe('DoorOpenDialogComponent', () => {
       imports: [DoorOpenDialogComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(DoorOpenDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

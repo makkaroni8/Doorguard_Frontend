@@ -3,13 +3,11 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {PasswordDialogComponent} from "../password-dialog/password-dialog.component";
-import {GeneratedPasswordDialogComponent} from "../../generated-password-dialog/generated-password-dialog.component";
-import {SnackbarComponent} from "../../snackbar/snackbar.component";
 import {SnackbarService} from "../../services/snackbarservice";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AuthService} from "../../services/authservice";
 
 @Component({
   selector: 'app-admin-page',
@@ -26,11 +24,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
   styleUrl: './admin-page.component.css'
 })
 export class AdminPageComponent {
-  adminPassword?: string;
 
   constructor(private dialog: MatDialog,
               private http: HttpClient,
-              private snackbarService: SnackbarService) {
+              private snackbarService: SnackbarService,
+              private authService: AuthService) {
   }
 
   openPasswordDialog(): void {
@@ -43,11 +41,11 @@ export class AdminPageComponent {
   }
 
   openDoor() {
-    this.http.post('http://localhost:8080/unlock-door/' + this.adminPassword, {},
+    this.http.post('http://localhost:8080/unlock-door/' + this.authService.getToken(), {},
       {responseType: 'text'}).subscribe(
       () => {
         console.log('Door successfully unlocked.');
-        this.snackbarService.openSnackbar('Success: TÜr erfolgreich geöffnet', 3000, true);
+        this.snackbarService.openSnackbar('Success: Tür erfolgreich geöffnet', 3000, true);
       },
       error => {
         console.error('Error occurred while unlocking door:', error);

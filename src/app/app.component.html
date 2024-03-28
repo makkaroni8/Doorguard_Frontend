@@ -7,8 +7,14 @@
   <a id="werbung" href="https://github.com/qeinz" target="_blank" style="cursor: pointer;">by qeinz</a>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
-          (click)="openAccountTab()">
+          [matMenuTriggerFor]="accountMenu" *ngIf="loggedIn">
     <mat-icon color="accent">account_circle</mat-icon>
   </button>
 </mat-toolbar>
+
+<mat-menu #accountMenu="matMenu">
+  <button mat-menu-item disabled>{{ username }}</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
+
 <router-outlet></router-outlet>

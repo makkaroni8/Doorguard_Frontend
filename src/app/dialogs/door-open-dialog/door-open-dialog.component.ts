@@ -11,7 +11,7 @@ import {MatInput} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {SnackbarService} from "../services/snackbarservice";
+import {SnackbarService} from "../../services/snackbarservice";
 
 @Component({
   selector: 'app-door-open-dialog',

@@ -3,11 +3,10 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {Router, RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
-import {DoorOpenDialogComponent} from "../../door-open-dialog/door-open-dialog.component";
-import {SnackbarService} from "../../services/snackbarservice";
+import {HttpClientModule} from "@angular/common/http";
+import {DoorOpenDialogComponent} from "../../dialogs/door-open-dialog/door-open-dialog.component";
 
-import {LoginDialogComponent} from "../../login-dialog/login-dialog.component";
+import {LoginDialogComponent} from "../../dialogs/login-dialog/login-dialog.component";
 import {AuthService} from "../../services/authservice";
 
 @Component({

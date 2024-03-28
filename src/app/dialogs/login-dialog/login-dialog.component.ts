@@ -11,11 +11,11 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 
-import {SnackbarService} from "../services/snackbarservice";
+import {SnackbarService} from "../../services/snackbarservice";
 import {Observable} from "rxjs";
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {AuthService} from "../services/authservice";
+import {AuthService} from "../../services/authservice";
 
 @Component({
   selector: 'app-login-dialog',
@@ -71,6 +71,7 @@ export class LoginDialogComponent implements OnInit {
           console.log('Logged in successfully. Account code:', accountCode);
           this.snackbarService.openSnackbar('Success: Login Erfolgreich', 3000, true);
           this.authService.setToken(accountCode);
+          this.authService.setUsername(this.username);
           this.router.navigate(['/admin-page']);
         },
         error => {

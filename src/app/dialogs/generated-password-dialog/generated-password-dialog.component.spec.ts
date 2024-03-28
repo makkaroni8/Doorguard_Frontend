@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GeneratedPasswordDialogComponent } from './generated-password-dialog.component';
+import {GeneratedPasswordDialogComponent} from './generated-password-dialog.component';
 
 describe('GeneratedPasswordDialogComponent', () => {
   let component: GeneratedPasswordDialogComponent;
@@ -11,7 +11,7 @@ describe('GeneratedPasswordDialogComponent', () => {
       imports: [GeneratedPasswordDialogComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(GeneratedPasswordDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

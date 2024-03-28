@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PasswordDialogComponent } from './password-dialog.component';
+import {PasswordDialogComponent} from './password-dialog.component';
 
 describe('PasswordDialogComponent', () => {
   let component: PasswordDialogComponent;
@@ -11,7 +11,7 @@ describe('PasswordDialogComponent', () => {
       imports: [PasswordDialogComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(PasswordDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
