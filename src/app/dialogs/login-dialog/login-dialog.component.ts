@@ -54,14 +54,15 @@ export class LoginDialogComponent implements OnInit {
 
   private baseUrl = 'http://localhost:8080'; // Ihr Backend-URL
 
-  use(username: string | undefined, password: string | undefined): Observable<string> {
+  use(username: string | undefined, password: string | undefined): Observable<any> {
     const url = `${this.baseUrl}/login`;
     const body = {username, password};
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-    console.log(body)
-    return this.http.post<string>(url, body, {headers, responseType: 'json'});
+    console.log(body);
+    return this.http.post(url, body, {headers, responseType: 'text'});
   }
+
 
   login(): void {
     console.log("username: " + this.username + " password: " + this.password)
