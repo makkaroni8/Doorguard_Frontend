@@ -6,6 +6,8 @@ import {MatIconButton} from "@angular/material/button";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {AuthService} from "./services/authservice";
 import {NgIf} from "@angular/common";
+import {AccountSettingsDialogComponent} from "./dialogs/account-settings-dialog/account-settings-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,9 @@ export class AppComponent {
   loggedIn: boolean = false;
   accountToken: string | null = null;
 
-  constructor(protected authService: AuthService, private router: Router) {
+  constructor(protected authService: AuthService,
+              private router: Router,
+              private dialog: MatDialog) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();
@@ -44,5 +48,19 @@ export class AppComponent {
     this.authService.removeUsername();
     this.authService.removeToken();
     this.router.navigate(['']);
+  }
+
+  settings() {
+    const dialogRef = this.dialog.open(AccountSettingsDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  dashboard() {
+    this.router.navigate(['/admin-page']);
   }
 }

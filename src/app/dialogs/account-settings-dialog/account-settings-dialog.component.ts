@@ -7,7 +7,6 @@ import {FormsModule} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
-import {BrowserModule} from "@angular/platform-browser";
 import {AuthService} from "../../services/authservice";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {SnackbarService} from "../../services/snackbarservice";
@@ -48,7 +47,39 @@ export class AccountSettingsDialogComponent {
               private snackbarService: SnackbarService) {
   }
 
+  updatePassword() {
+    // Überprüfen, ob das neue Passwort leer oder nur aus Leerzeichen besteht
+    if (!this.newPassword || !this.newPassword.trim()) {
+      this.snackbarService.openSnackbar('Error: Please enter a valid new password', 3000, false);
+      return;
+    }
+
+    console.log('New password:', this.newPassword);
+    const url = 'http://localhost:8080/update-password';
+
+    this.http.put(url, {
+      accountCode: this.authService.getToken(),
+      password: this.newPassword
+    }, {responseType: 'text'}).subscribe(
+      response => {
+        console.log('Password updated successfully:', response);
+        this.snackbarService.openSnackbar('Success: Password Erfolgreich geändert', 3000, true);
+        this.dialogRef.close();
+      },
+      error => {
+        console.error('Error occurred while updating password:', error);
+        this.snackbarService.openSnackbar('Error: Password konnte nicht geändert werden', 3000, false);
+      }
+    );
+  }
+
   updateName() {
+    // Überprüfen, ob der neue Name leer oder nur aus Leerzeichen besteht
+    if (!this.newName || !this.newName.trim()) {
+      this.snackbarService.openSnackbar('Error: Please enter a valid new name', 3000, false);
+      return;
+    }
+
     console.log('New name:', this.newName);
     const accountCode = this.authService.getToken();
     const url = 'http://localhost:8080/update-name';
@@ -68,31 +99,15 @@ export class AccountSettingsDialogComponent {
         this.snackbarService.openSnackbar('Error: Name konnte nicht geändert werden', 3000, false);
       }
     );
-    this.dialogRef.close();
-  }
-
-  updatePassword() {
-    console.log('New password:', this.newPassword);
-    const url = 'http://localhost:8080/update-password';
-
-    this.http.put(url, {
-      accountCode: this.authService.getToken(),
-      password: this.newPassword
-    }, {responseType: 'text'}).subscribe(
-      response => {
-        console.log('Password updated successfully:', response);
-        this.snackbarService.openSnackbar('Success: Password Erfolgreich geändert', 3000, true);
-        this.dialogRef.close();
-      },
-      error => {
-        console.error('Error occurred while updating password:', error);
-        this.snackbarService.openSnackbar('Error: Password konnte nicht geändert werden', 3000, false);
-      }
-    );
-    this.dialogRef.close();
   }
 
   updateCode() {
+    // Überprüfen, ob der neue Code leer oder nur aus Leerzeichen besteht
+    if (!this.newCode || !this.newCode.trim()) {
+      this.snackbarService.openSnackbar('Error: Please enter a valid new code', 3000, false);
+      return;
+    }
+
     console.log('New code:', this.newCode);
     const accountCode = this.authService.getToken();
     const url = 'http://localhost:8080/update-code';
@@ -112,6 +127,7 @@ export class AccountSettingsDialogComponent {
         this.snackbarService.openSnackbar('Error: Code konnte nicht geändert werden', 3000, false);
       }
     );
-    this.dialogRef.close();
   }
+
+
 }

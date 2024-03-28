@@ -12,9 +12,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {
-  GeneratedPasswordDialogComponent
-} from "../generated-password-dialog/generated-password-dialog.component";
+import {GeneratedPasswordDialogComponent} from "../generated-password-dialog/generated-password-dialog.component";
 import {SnackbarService} from "../../services/snackbarservice";
 import {AuthService} from "../../services/authservice";
 

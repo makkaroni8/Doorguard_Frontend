@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AccountSettingsDialogComponent } from './account-settings-dialog.component';
+import {AccountSettingsDialogComponent} from './account-settings-dialog.component';
 
 describe('AccountSettingsDialogComponent', () => {
   let component: AccountSettingsDialogComponent;
@@ -11,7 +11,7 @@ describe('AccountSettingsDialogComponent', () => {
       imports: [AccountSettingsDialogComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(AccountSettingsDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

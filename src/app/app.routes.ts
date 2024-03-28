@@ -2,7 +2,6 @@ import {Routes} from '@angular/router';
 import {MainPageComponent} from "./components/main-page/main-page.component";
 import {AdminPageComponent} from "./components/admin-page/admin-page.component";
 import {CodesTableComponent} from "./components/codes-table/codes-table.component";
-import {AuthService} from "./services/authservice";
 import {authGuard} from "./services/authGuard";
 
 export const routes: Routes = [
