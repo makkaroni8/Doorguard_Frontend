@@ -5,7 +5,8 @@
     <input matInput [(ngModel)]="code" placeholder="Code" autofocus>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="dialog-buttons">
   <button mat-button (click)="onCancelClick()">Cancel</button>
+  <span class="spacer"></span>
   <button mat-button color="primary" (click)="onOpenClick()">Open</button>
 </div>

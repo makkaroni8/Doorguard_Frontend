@@ -1,0 +1,8 @@
+.dialog-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spacer {
+  flex-grow: 1;
+}
