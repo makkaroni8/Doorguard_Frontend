@@ -55,7 +55,7 @@ export class AccountSettingsDialogComponent {
     }
 
     console.log('New password:', this.newPassword);
-    const url = 'http://192.168.178.76/api/update-password';
+    const url = 'api/update-password';
 
     this.http.put(url, {
       accountCode: this.authService.getToken(),
@@ -82,7 +82,7 @@ export class AccountSettingsDialogComponent {
 
     console.log('New name:', this.newName);
     const accountCode = this.authService.getToken();
-    const url = 'http://192.168.178.76/api/update-name';
+    const url = 'api/update-name';
 
     this.http.put(url, {
       accountCode: accountCode,
@@ -110,7 +110,7 @@ export class AccountSettingsDialogComponent {
 
     console.log('New code:', this.newCode);
     const accountCode = this.authService.getToken();
-    const url = 'http://192.168.178.76/api/update-code';
+    const url = 'api/update-code';
 
     this.http.put(url, {
       accountCode: accountCode,

@@ -48,7 +48,7 @@ export class PasswordDialogComponent {
   }
 
   generatePassword(): void {
-    this.http.post('http://192.168.178.76/api/generate-code', {
+    this.http.post('api/generate-code', {
       onetimePassword: this.passwordType === 'onetime',
       onedayPassword: this.passwordType === 'oneday',
       accountCode: this.authService.getToken()

@@ -42,7 +42,7 @@ export class AdminPageComponent {
   }
 
   openDoor() {
-    this.http.post('http://192.168.178.76/api/unlock-door/' + this.authService.getToken(), {},
+    this.http.post('api/unlock-door/' + this.authService.getToken(), {},
       {responseType: 'text'}).subscribe(
       () => {
         console.log('Door successfully unlocked.');

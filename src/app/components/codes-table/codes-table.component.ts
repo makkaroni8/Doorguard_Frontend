@@ -58,7 +58,7 @@ export class CodesTableComponent implements OnInit {
   }
 
   getAllCodes(): void {
-    this.http.get<any[]>('http://192.168.178.76/api/get-all-codes').subscribe(
+    this.http.get<any[]>('api/get-all-codes').subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
       },
@@ -70,7 +70,7 @@ export class CodesTableComponent implements OnInit {
   }
 
   removeCode(id: number): void {
-    this.http.delete(`http://192.168.178.76/api/delete-code/${id}`,
+    this.http.delete(`api/delete-code/${id}`,
       {responseType: 'text'}).subscribe(
       () => {
         console.log('Code successfully removed.');
@@ -85,7 +85,7 @@ export class CodesTableComponent implements OnInit {
   }
 
   deactivateCode(id: number): void {
-    this.http.put(`http://192.168.178.76/api/deactivate-code/${id}`,
+    this.http.put(`api/deactivate-code/${id}`,
       {}, {responseType: 'text'}).subscribe(
       () => {
         console.log('Code successfully deactivated.');
@@ -100,7 +100,7 @@ export class CodesTableComponent implements OnInit {
   }
 
   activateCode(id: number): void {
-    this.http.put(`http://192.168.178.76/api/activate-code/${id}`,
+    this.http.put(`api/activate-code/${id}`,
       {}, {responseType: 'text'}).subscribe(
       () => {
         console.log('Code successfully activated.');

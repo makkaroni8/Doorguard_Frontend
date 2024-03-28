@@ -52,7 +52,7 @@ export class LoginDialogComponent implements OnInit {
     }
   }
 
-  private baseUrl = 'httphttp://192.168.178.76/api'; // Ihr Backend-URL
+  private baseUrl = 'api'; // Ihr Backend-URL
 
   use(username: string | undefined, password: string | undefined): Observable<any> {
     const url = `${this.baseUrl}/login`;

@@ -46,7 +46,7 @@ export class DoorOpenDialogComponent {
 
   onOpenClick(): void {
     console.log('Code:', this.code);
-    this.http.post('http://192.168.178.76/api/unlock-door/' + this.code, {},
+    this.http.post('api/unlock-door/' + this.code, {},
       {responseType: 'text'}).subscribe(
       () => {
         console.log('Door successfully unlocked.');
