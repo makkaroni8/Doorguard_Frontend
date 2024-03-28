@@ -4,6 +4,8 @@ import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {PasswordDialogComponent} from "../password-dialog/password-dialog.component";
 
 @Component({
   selector: 'app-admin-page',
@@ -22,24 +24,34 @@ export class AdminPageComponent {
 
   generatedPassword?: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private dialog: MatDialog) {
   }
 
   private baseUrl = 'http://localhost:8080/generate-code';
 
-  generatePasswordAndCreateCode(onetimePassword: boolean, onedayPassword: boolean): Observable<string> {
-
+  generatePassword(onetimePassword: boolean, onedayPassword: boolean): Observable<string> {
     const requestBody = {
       onetimePassword: onetimePassword,
       onedayPassword: onedayPassword
     };
-    return this.http.post<string>(this.baseUrl, requestBody);
+    return this.http.post<string>('http://localhost:8080/generate-code', requestBody);
   }
 
-  generatePassword(onetimePassword: boolean, onedayPassword: boolean): void {
-    this.generatePasswordAndCreateCode(onetimePassword, onedayPassword)
+  openPasswordDialog(onetimePassword: boolean, onedayPassword: boolean): void {
+    this.generatePassword(onetimePassword, onedayPassword)
       .subscribe(password => {
-        this.generatedPassword = password;
+        const dialogRef = this.dialog.open(PasswordDialogComponent, {
+          data: { password: password }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result === 'ok') {
+            // Handle "OK" action
+          } else {
+            // Handle "Close" action or do nothing
+          }
+        });
       });
   }
 
