@@ -4,7 +4,7 @@ import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
-import {PasswordDialogComponent} from "../password-dialog/password-dialog.component";
+import {PasswordDialogComponent} from "../../dialogs/password-dialog/password-dialog.component";
 import {SnackbarService} from "../../services/snackbarservice";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AuthService} from "../../services/authservice";
@@ -52,5 +52,9 @@ export class AdminPageComponent {
         this.snackbarService.openSnackbar('ERROR: Tür konnte nicht geöffnet werden', 3000, false);
       }
     );
+  }
+
+  openAccountSettingsDialog() {
+
   }
 }

@@ -14,7 +14,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {
   GeneratedPasswordDialogComponent
-} from "../../dialogs/generated-password-dialog/generated-password-dialog.component";
+} from "../generated-password-dialog/generated-password-dialog.component";
 import {SnackbarService} from "../../services/snackbarservice";
 import {AuthService} from "../../services/authservice";
 

@@ -14,7 +14,7 @@
     <mat-card-content class="button_text">Show Codes</mat-card-content>
     <mat-card-content class="button_info_text">Zeige deine<br>vorhandenen Codes</mat-card-content>
   </mat-card>
-  <mat-card class="show_card" routerLink="">
+  <mat-card class="show_card" (click)="openAccountSettingsDialog()">
     <mat-icon class="button_icons" color="accent">settings</mat-icon>
     <mat-card-content class="button_text">Account settings</mat-card-content>
     <mat-card-content class="button_info_text">Verändere deine<br>Account einstellungen</mat-card-content>
