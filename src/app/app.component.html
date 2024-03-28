@@ -13,12 +13,24 @@
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" class="account_menu">
-  <button mat-menu-item disabled>{{ authService.getUsername() }}</button>
-  <button mat-menu-item disabled>{{ authService.getToken() }}</button>
+  <div class="account_menu_text">
+    <button mat-menu-item disabled>{{ authService.getUsername() }}</button>
+    <button mat-menu-item disabled>{{ authService.getToken() }}</button>
+  </div>
   <hr>
-  <button mat-menu-item (click)="dashboard()">Dashbaord</button>
-  <button mat-menu-item (click)="settings()">Settings</button>
-  <button mat-menu-item (click)="logout()">Logout</button>
+  <div class="account_menu_buttons">
+
+    <button mat-menu-item (click)="dashboard()">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+
+    <button mat-menu-item (click)="settings()">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon color="warn">logout</mat-icon>
+    </button>
+  </div>
 </mat-menu>
 
 <router-outlet></router-outlet>
