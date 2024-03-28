@@ -24,35 +24,18 @@ export class AdminPageComponent {
 
   generatedPassword?: string;
 
-  constructor(private http: HttpClient,
-              private dialog: MatDialog) {
+  constructor(private dialog: MatDialog) {
   }
 
-  private baseUrl = 'http://localhost:8080/generate-code';
+  openPasswordDialog(): void {
+    const dialogRef = this.dialog.open(PasswordDialogComponent);
 
-  generatePassword(onetimePassword: boolean, onedayPassword: boolean): Observable<string> {
-    const requestBody = {
-      onetimePassword: onetimePassword,
-      onedayPassword: onedayPassword
-    };
-    return this.http.post<string>('http://localhost:8080/generate-code', requestBody);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'ok') {
+        // Handle "OK" action
+      } else {
+        // Handle "Close" action or do nothing
+      }
+    });
   }
-
-  openPasswordDialog(onetimePassword: boolean, onedayPassword: boolean): void {
-    this.generatePassword(onetimePassword, onedayPassword)
-      .subscribe(password => {
-        const dialogRef = this.dialog.open(PasswordDialogComponent, {
-          data: { password: password }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          if (result === 'ok') {
-            // Handle "OK" action
-          } else {
-            // Handle "Close" action or do nothing
-          }
-        });
-      });
-  }
-
 }
