@@ -12,8 +12,9 @@
   </button>
 </mat-toolbar>
 
-<mat-menu #accountMenu="matMenu">
+<mat-menu #accountMenu="matMenu" class="account_menu">
   <button mat-menu-item disabled>{{ username }}</button>
+  <hr>
   <button mat-menu-item (click)="logout()">Logout</button>
 </mat-menu>
 
