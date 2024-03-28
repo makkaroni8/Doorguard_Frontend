@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   MatDialogActions,
   MatDialogClose,
@@ -15,6 +15,7 @@ import {SnackbarService} from "../services/snackbarservice";
 import {Observable} from "rxjs";
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {AuthService} from "../services/authservice";
 
 @Component({
   selector: 'app-login-dialog',
@@ -33,14 +34,22 @@ import {Router} from "@angular/router";
   templateUrl: './login-dialog.component.html',
   styleUrl: './login-dialog.component.css'
 })
-export class LoginDialogComponent {
+export class LoginDialogComponent implements OnInit {
   username?: string;
   password?: string;
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>,
               private snackbarService: SnackbarService,
               private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/admin-page']); // Wenn Benutzer bereits eingeloggt ist, direkt auf Admin-Seite weiterleiten
+      this.dialogRef.close();
+    }
   }
 
   private baseUrl = 'http://localhost:8080'; // Ihr Backend-URL
@@ -61,6 +70,7 @@ export class LoginDialogComponent {
         accountCode => {
           console.log('Logged in successfully. Account code:', accountCode);
           this.snackbarService.openSnackbar('Success: Login Erfolgreich', 3000, true);
+          this.authService.setToken(accountCode);
           this.router.navigate(['/admin-page']);
         },
         error => {
