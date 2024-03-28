@@ -35,7 +35,6 @@ export class AdminPageComponent {
 
   openPasswordDialog(): void {
     const dialogRef = this.dialog.open(PasswordDialogComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ok') {
       } else {
@@ -44,16 +43,15 @@ export class AdminPageComponent {
   }
 
   openDoor() {
-    this.adminPassword = "66017";
     this.http.post('http://localhost:8080/unlock-door/' + this.adminPassword, {},
       {responseType: 'text'}).subscribe(
       () => {
         console.log('Door successfully unlocked.');
-        this.snackbarService.openSnackbar('Your message here', 3000, true);
+        this.snackbarService.openSnackbar('Success: TÜr erfolgreich geöffnet', 3000, true);
       },
       error => {
         console.error('Error occurred while unlocking door:', error);
-        this.snackbarService.openSnackbar('Your message here', 3000, false);
+        this.snackbarService.openSnackbar('ERROR: Tür konnte nicht geöffnet werden', 3000, false);
       }
     );
   }

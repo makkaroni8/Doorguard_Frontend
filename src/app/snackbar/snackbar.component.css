@@ -8,13 +8,13 @@
 }
 
 .success {
-  color: green;
-  font-size: 14px;
+  color: #59ff59;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .failure {
-  color: red;
-  font-size: 14px;
+  color: #ff3d3d;
+  font-size: 16px;
   font-weight: bold;
 }

@@ -12,6 +12,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {GeneratedPasswordDialogComponent} from "../../generated-password-dialog/generated-password-dialog.component";
+import {SnackbarService} from "../../services/snackbarservice";
 
 @Component({
   selector: 'app-password-dialog',
@@ -38,20 +39,29 @@ export class PasswordDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<PasswordDialogComponent>,
     private dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    private snackbarService: SnackbarService
   ) {}
 
   generatePassword(): void {
     this.http.post('http://localhost:8080/generate-code', {
       onetimePassword: this.passwordType === 'onetime',
       onedayPassword: this.passwordType === 'oneday'
-    }, { responseType: 'text' }).subscribe(password => {
-      this.dialog.open(GeneratedPasswordDialogComponent, {
-        data: { password: password }
-      });
-      this.dialogRef.close();
+    }, { responseType: 'text' }).subscribe({
+      next: (password) => {
+        this.dialog.open(GeneratedPasswordDialogComponent, {
+          data: { password: password }
+        });
+        this.snackbarService.openSnackbar('Success: Code erfolgreich erstellt', 3000, true);
+        this.dialogRef.close();
+      },
+      error: (error) => {
+        console.error('Error occurred while generating password:', error);
+        this.snackbarService.openSnackbar('Error: Code konnte nicht erstellt werden', 3000, false);
+      }
     });
   }
+
 
   closeDialog(): void {
     this.dialogRef.close();
