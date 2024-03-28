@@ -1,3 +1,6 @@
+
+![NVIDIA_Share_Sqw3m06pgZ](https://github.com/qeinz/Doorguard_Frontend/assets/66924611/be4fd1c0-d493-46c5-8c05-5d7833670744)
+
 # DoorguadFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
