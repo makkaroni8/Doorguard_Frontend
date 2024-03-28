@@ -3,9 +3,11 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {DoorOpenDialogComponent} from "../../door-open-dialog/door-open-dialog.component";
 import {SnackbarService} from "../../services/snackbarservice";
+
+import {LoginDialogComponent} from "../../login-dialog/login-dialog.component";
 
 @Component({
   selector: 'app-main-page',
@@ -33,7 +35,9 @@ export class MainPageComponent {
     });
   }
 
-  adminLogin() {
-    // Fügen Sie hier die Logik für den Admin-Login hinzu
+  adminLogin(): void {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '250px'
+    });
   }
 }

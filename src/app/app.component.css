@@ -1,3 +1,11 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+#werbung {
+  margin-left: 10px;
+  font-size: 10px;
+  margin-top: 5px;
+  text-decoration: none;
+  color: #e5e5e5;
+}
