@@ -43,7 +43,8 @@ export class CodesTableComponent implements OnInit {
   displayedColumns: string[] = ['id', 'password', 'onetimePassword', 'onedayPassword', 'creationDate', 'expirationDate', 'actions'];
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     this.getAllCodes();
@@ -61,10 +62,10 @@ export class CodesTableComponent implements OnInit {
   }
 
   removeCode(id: number): void {
-    this.http.delete(`http://localhost:8080/delete-code/${id}`).subscribe(
+    this.http.delete(`http://localhost:8080/delete-code/${id}`,
+      {responseType: 'text'}).subscribe(
       () => {
         console.log('Code successfully removed.');
-        // Refresh data after removing code
         this.getAllCodes();
       },
       error => {
