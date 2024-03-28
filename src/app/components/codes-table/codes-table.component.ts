@@ -11,7 +11,7 @@ import {
 } from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
-import {DatePipe, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 
 @Component({
   selector: 'app-codes-table',
@@ -33,14 +33,15 @@ import {DatePipe, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
     HttpClientModule,
     TitleCasePipe,
     NgForOf,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './codes-table.component.html',
   styleUrl: './codes-table.component.css'
 })
 export class CodesTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'password', 'onetimePassword', 'onedayPassword', 'creationDate', 'expirationDate', 'actions'];
+  displayedColumns: string[] = ['id', 'password', 'onetimePassword', 'onedayPassword', 'creationDate', 'expirationDate', 'activated', 'actions'];
   dataSource!: MatTableDataSource<any>;
 
   constructor(private http: HttpClient) {
@@ -75,10 +76,28 @@ export class CodesTableComponent implements OnInit {
   }
 
   deactivateCode(id: number): void {
-    // Implementiere die Logik zum Deaktivieren eines Codes
+    this.http.put(`http://localhost:8080/deactivate-code/${id}`,
+      {}, {responseType: 'text'}).subscribe(
+      () => {
+        console.log('Code successfully deactivated.');
+        this.getAllCodes();
+      },
+      error => {
+        console.error('Error occurred while deactivating code:', error);
+      }
+    );
   }
 
   activateCode(id: number): void {
-    // Implementiere die Logik zum Aktivieren eines Codes
+    this.http.put(`http://localhost:8080/activate-code/${id}`,
+      {}, {responseType: 'text'}).subscribe(
+      () => {
+        console.log('Code successfully activated.');
+        this.getAllCodes();
+      },
+      error => {
+        console.error('Error occurred while activating code:', error);
+      }
+    );
   }
 }

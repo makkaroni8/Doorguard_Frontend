@@ -4,21 +4,27 @@
       <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
       <td mat-cell *matCellDef="let element; let i = index">
         <ng-container *ngIf="column !== 'actions'; else actionsColumn">
-          <ng-container *ngIf="column !== 'expirationDate' && column !== 'creationDate'; else dateColumn">
+          <ng-container *ngIf="column !== 'expirationDate' && column !== 'creationDate' && column !== 'activated'; else dateOrActivatedColumn">
             {{ element[column] }}
           </ng-container>
-          <ng-template #dateColumn>
-            {{ element[column] !== null ? (element[column] | date:'dd.MM.yyyy HH:mm') : 'never' }}
+          <ng-template #dateOrActivatedColumn>
+            {{ column === 'activated' ? (element[column] ? 'true' : 'false') : (element[column] !== null ? (element[column] | date:'dd.MM.yyyy HH:mm') : 'never') }}
           </ng-template>
         </ng-container>
         <ng-template #actionsColumn>
-          <button mat-icon-button (click)="deactivateCode(element.id)">
-            <mat-icon color="red">block</mat-icon>
+          <button mat-icon-button (click)="deactivateCode(element.password)"
+                  [disabled]="!element.activated"
+                  [style.opacity]="!element.activated ? '0.5' : '1'"
+                  [style.color]="element.activated ? 'red' : 'grey'">
+            <mat-icon id="block_button">block</mat-icon>
           </button>
-          <button mat-icon-button (click)="activateCode(element.id)">
-            <mat-icon color="green">check_circle</mat-icon>
+          <button mat-icon-button (click)="activateCode(element.password)"
+                  [disabled]="element.activated"
+                  [style.opacity]="element.activated ? '0.5' : '1'"
+                  [style.color]="element.activated ? 'grey' : 'green'">
+            <mat-icon id="activat_button">done_all</mat-icon>
           </button>
-          <button mat-icon-button (click)="removeCode(element.password)">
+          <button mat-icon-button (click)="removeCode(element.password)" [disabled]="false">
             <mat-icon color="warn">delete</mat-icon>
           </button>
         </ng-template>
