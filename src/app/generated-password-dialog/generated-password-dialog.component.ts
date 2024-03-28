@@ -34,10 +34,12 @@ export class GeneratedPasswordDialogComponent {
 
   sharePassword(): void {
     const password = this.data.password;
+    const shareText = `Hier ist mein aktueller Code: ${password}, den ihr auf der Website xxx.de/opendoor eingeben müsst!`;
+
     if (navigator.share) {
       navigator.share({
         title: 'Share Code',
-        text: `Hier ist mein aktueller Code: ${password}, den ihr auf der Website xxx.de/opendoor eingeben müsst!`,
+        text: shareText,
         url: 'https://example.com/opendoor' // Hier die tatsächliche URL Ihrer Website einfügen
       })
         .then(() => console.log('Code shared successfully'))
@@ -48,4 +50,5 @@ export class GeneratedPasswordDialogComponent {
       });
     }
   }
+
 }
