@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
@@ -11,7 +11,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {ThemeService} from "./services/themeService";
 import {inject} from "@angular/core/testing";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {FormsModule} from "@angular/forms";
+import {FormControl, FormsModule} from "@angular/forms";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'doorguadFrontend';
   loggedIn: boolean = false;
   accountToken: string | null = null;
@@ -29,7 +30,8 @@ export class AppComponent {
   constructor(protected authService: AuthService,
               private router: Router,
               private dialog: MatDialog,
-              protected themeService: ThemeService) {
+              protected themeService: ThemeService,
+              private overlayContainer: OverlayContainer) {
 
     this.isChecked = this.themeService.themeSignal() === 'dark'
 
@@ -38,6 +40,10 @@ export class AppComponent {
         this.checkLoginStatus();
       }
     });
+  }
+
+  ngOnInit() {
+
   }
 
   checkLoginStatus(): void {
@@ -69,9 +75,9 @@ export class AppComponent {
     this.router.navigate(['/admin-page']);
   }
 
-  toggleChanged(): void {
+  toggleTheme(): void {
     this.themeService.updateTheme();
+    this.isChecked = !this.isChecked;
   }
-
 
 }
