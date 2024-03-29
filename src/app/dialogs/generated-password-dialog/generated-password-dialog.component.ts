@@ -7,9 +7,10 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from "@angular/material/dialog";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatIcon} from "@angular/material/icon";
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-generated-password-dialog',
@@ -20,7 +21,8 @@ import {MatIcon} from "@angular/material/icon";
     MatDialogActions,
     MatButton,
     MatDialogClose,
-    MatIcon
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './generated-password-dialog.component.html',
   styleUrl: './generated-password-dialog.component.css'
@@ -29,7 +31,8 @@ export class GeneratedPasswordDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<GeneratedPasswordDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private clipboard: Clipboard
   ) {
   }
 
@@ -50,6 +53,10 @@ export class GeneratedPasswordDialogComponent {
         duration: 3000
       });
     }
+  }
+
+  copyPassword() {
+    this.clipboard.copy(this.data.password);
   }
 
 }
