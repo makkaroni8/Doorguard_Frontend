@@ -28,5 +28,5 @@
   text-align: center;
 }
 
-.dark-icon { color: yellow; }
-.light-icon { color: #24f7ff; }
+#light-icon { color: yellow; }
+#dark-icon { color: #24f7ff; }
