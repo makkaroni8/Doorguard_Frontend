@@ -37,7 +37,6 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    console.log("aktueller token: " + this.getToken())
     return !!this.getToken();
   }
 

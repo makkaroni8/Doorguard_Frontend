@@ -1,3 +1,4 @@
+<body [ngClass]="themeService.themeSignal()">
 <mat-toolbar color="primary">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
           color="accent" routerLink="">
@@ -6,10 +7,16 @@
   <span routerLink="" style="cursor:pointer;">Door-Guard</span>
   <a id="werbung" href="https://github.com/qeinz" target="_blank" style="cursor: pointer;">by qeinz</a>
   <span class="example-spacer"></span>
+
+  <mat-icon (click)="toggleTheme()" [attr.id]="isChecked ? 'dark-icon' : 'light-icon'" style="cursor: pointer">
+    {{ isChecked ? 'bedtime' : 'brightness_7' }}
+  </mat-icon>
+
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
           [matMenuTriggerFor]="accountMenu" *ngIf="loggedIn">
     <mat-icon color="accent">account_circle</mat-icon>
   </button>
+
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" class="account_menu">
@@ -34,3 +41,4 @@
 </mat-menu>
 
 <router-outlet></router-outlet>
+</body>

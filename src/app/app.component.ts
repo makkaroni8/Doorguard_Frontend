@@ -1,29 +1,40 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {AuthService} from "./services/authservice";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {AccountSettingsDialogComponent} from "./dialogs/account-settings-dialog/account-settings-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ThemeService} from "./services/themeService";
+import {inject} from "@angular/core/testing";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {FormControl, FormsModule} from "@angular/forms";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbar, MatIcon, MatIconButton, RouterLink, MatMenuTrigger, MatMenu, MatMenuItem, NgIf],
+  imports: [RouterOutlet, MatToolbar, MatIcon, MatIconButton, RouterLink, MatMenuTrigger, MatMenu, MatMenuItem, NgIf, NgClass, MatSlideToggle, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'doorguadFrontend';
   loggedIn: boolean = false;
   accountToken: string | null = null;
+  isChecked: boolean | undefined;
 
   constructor(protected authService: AuthService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              protected themeService: ThemeService,
+              private overlayContainer: OverlayContainer) {
+
+    this.isChecked = this.themeService.themeSignal() === 'dark'
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();
@@ -31,8 +42,8 @@ export class AppComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.checkLoginStatus();
+  ngOnInit() {
+
   }
 
   checkLoginStatus(): void {
@@ -63,4 +74,10 @@ export class AppComponent {
   dashboard() {
     this.router.navigate(['/admin-page']);
   }
+
+  toggleTheme(): void {
+    this.themeService.updateTheme();
+    this.isChecked = !this.isChecked;
+  }
+
 }
