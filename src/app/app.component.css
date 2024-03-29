@@ -27,3 +27,6 @@
   align-items: center;
   text-align: center;
 }
+
+.dark-icon { color: yellow; }
+.light-icon { color: #24f7ff; }

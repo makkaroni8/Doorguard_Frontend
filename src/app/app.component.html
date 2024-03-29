@@ -6,10 +6,12 @@
   <span routerLink="" style="cursor:pointer;">Door-Guard</span>
   <a id="werbung" href="https://github.com/qeinz" target="_blank" style="cursor: pointer;">by qeinz</a>
   <span class="example-spacer"></span>
+
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
           [matMenuTriggerFor]="accountMenu" *ngIf="loggedIn">
     <mat-icon color="accent">account_circle</mat-icon>
   </button>
+
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" class="account_menu">
