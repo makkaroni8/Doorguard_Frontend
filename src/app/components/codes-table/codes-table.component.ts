@@ -60,6 +60,7 @@ export class CodesTableComponent implements OnInit {
   getAllCodes(): void {
     this.http.get<any[]>('http://localhost:8080/get-all-codes').subscribe(
       data => {
+        data.reverse();
         this.dataSource = new MatTableDataSource(data);
       },
       error => {
