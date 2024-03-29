@@ -25,7 +25,7 @@ export class AppComponent implements OnInit{
   title = 'doorguadFrontend';
   loggedIn: boolean = false;
   accountToken: string | null = null;
-  isChecked: boolean | undefined;
+  //isChecked: boolean | undefined;
 
   constructor(protected authService: AuthService,
               private router: Router,
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit{
               protected themeService: ThemeService,
               private overlayContainer: OverlayContainer) {
 
-    this.isChecked = this.themeService.themeSignal() === 'dark'
+    //this.isChecked = this.themeService.themeSignal() === 'dark'
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit{
 
   toggleTheme(): void {
     this.themeService.updateTheme();
-    this.isChecked = !this.isChecked;
+    //this.isChecked = !this.isChecked;
   }
 
 }
