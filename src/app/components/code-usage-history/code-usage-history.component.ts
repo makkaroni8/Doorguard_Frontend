@@ -58,7 +58,7 @@ export class CodeUsageHistoryComponent implements OnInit {
 
   getAllCodes(): void {
     const token = this.authService.getToken();
-    const url = `http://localhost:8080/get-codes-history/${token}`;
+    const url = `api/get-codes-history/${token}`;
 
     this.http.get<any[]>(url).subscribe(
       data => {
